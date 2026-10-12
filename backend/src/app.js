@@ -1,9 +1,15 @@
 import "dotenv/config";
 import express from "express";
+import quizRoutes from "./routes/quizRoute.js";
+import errorHandler from "./middlewares/errorHandler.js";
+import healthRoutes from "./routes/healthRoute.js";
 
 const app = express();
 app.use(express.json());
 
-app.get("/", (req, res) => res.send("Back to development Baby!!"));
+app.use("/api/health", healthRoutes);
+app.use("/api/quizzes", quizRoutes);
 
-export default app
+app.use(errorHandler);
+
+export default app;
